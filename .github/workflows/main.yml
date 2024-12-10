@@ -1,4 +1,4 @@
-name: Output Text Files
+name: Create and Save Text Files
 
 on:
   push:
@@ -19,14 +19,14 @@ jobs:
         with:
           python-version: '3.x'
 
-      - name: Install dependencies
-        run: |
-          python -m pip install --upgrade pip
-
-      - name: Run Python script and output files
+      - name: Run Python script
         run: |
           python text.py
-          echo "Contents of file1.txt:"
-          cat file1.txt
-          echo "Contents of file2.txt:"
-          cat file2.txt
+
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: created-text-files
+          path: |
+            file1.txt
+            file2.txt
